@@ -1,0 +1,15 @@
+name: student-api
+
+namespace: default
+replicas: 1
+
+image:
+  name: student-api
+  tag: beta4
+
+service:
+  enabled: True
+  name: student-api
+  type: NodePort
+  port: 9010
+  targetPort: 9010

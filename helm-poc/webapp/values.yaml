@@ -1,0 +1,18 @@
+name: webapp
+
+namespace: default
+replicas: 1
+
+containerPort: 80
+
+image:
+  name: default
+  tag: 1.0.0
+
+service:
+  enabled: False
+  name: webapp-svc
+  type: ClusterIP
+  externalName: null
+  port: 8080
+  targetPort: 80

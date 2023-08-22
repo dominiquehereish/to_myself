@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: student-api-deployment
+spec:
+  selector:
+    matchLabels:
+      app: student-api
+  template:
+    metadata:
+      labels:
+        app: student-api
+    spec:
+      containers:
+      - name: student-api
+        image: student-api:beta4
+        envFrom:
+        - configMapRef:
+            name: first-config
+        - configMapRef:
+            name: second-config
+        - secretRef:
+            name: spring-secret
+        imagePullPolicy: Never
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: student-api-service
+spec:
+  type: NodePort
+  selector:
+    app: student-api
+  ports:
+  - port: 9010
+    targetPort: 9010
+    protocol: TCP
+
